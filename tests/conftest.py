@@ -9,14 +9,14 @@ from src.fastapp import app
 DATABASE_URL = "sqlite+aiosqlite:///./recipes.db"
 
 engine = create_async_engine(DATABASE_URL, echo=True)
-TestingSessionLocal = sessionmaker(bind=engine, expire_on_commit=False, class_=AsyncSession)  # type: ignore
+TestingSession = sessionmaker(bind=engine, expire_on_commit=False, class_=AsyncSession)  # type: ignore
 
 @pytest.fixture
 async def session():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    async with TestingSessionLocal() as session:
+    async with TestingSession() as session:
         yield session
 
     async with engine.begin() as conn:
