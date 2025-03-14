@@ -22,11 +22,9 @@ class RecipeDetailOut(RecipeBaseOut):
     cooking_time: int
 
 
-
 class RecipeListOut(RecipeBaseOut):
     ingredients: str
     description: str | None = None
-
 
 
 class RecipeFullDetailOut(RecipeDetailOut, RecipeListOut):
