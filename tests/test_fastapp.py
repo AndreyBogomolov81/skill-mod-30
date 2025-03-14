@@ -1,20 +1,8 @@
-# from fastapi.testclient import TestClient
-# import pytest
-#
-# from src.fastapp import app
-#
-#
-# client = TestClient(app)
-
-import pytest
-from httpx import AsyncClient
-
-
-def test_get_home(client: AsyncClient):
+def test_get_home(client):
     res = client.get('/home')
     assert 200 == res.status_code
 
-def test_add_recipe():
+def test_add_recipe(client):
     response = client.post(
         "/recipes/",
         json={
@@ -27,10 +15,10 @@ def test_add_recipe():
 
     assert response.status_code == 201
 
-def test_recipe_get_by_id(client: AsyncClient):
+def test_recipe_get_by_id(client):
     resp = client.get('/recipes/1')
     assert resp.status_code == 200
 
-def test_recipes_get_all(client: AsyncClient):
+def test_recipes_get_all(client):
     resp = client.get('/recipes/')
     assert resp.status_code == 200
